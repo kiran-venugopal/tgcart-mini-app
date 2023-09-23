@@ -1,0 +1,25 @@
+{
+  "name": "react-sdk-example",
+  "private": true,
+  "version": "0.0.6",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": " vite build",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@twa.js/sdk": "^0.11.1",
+    "@twa.js/sdk-react": "^0.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.30",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.5"
+  }
+}
