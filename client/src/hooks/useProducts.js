@@ -12,16 +12,13 @@ const useProducts = () => {
   const { products, categories, activeCategory } = state;
 
   useEffect(() => {
-    getProducts({ limit: 20 }).then((result) => {
-      setState((prev) => ({ ...prev, products: result.products }));
-    });
     getCategories().then((result) => {
       setState((prev) => ({ ...prev, categories: result }));
     });
   }, []);
 
   useEffect(() => {
-    getProducts({ category: activeCategory }).then((result) => {
+    getProducts({ category: activeCategory, limit: 20 }).then((result) => {
       setState((prev) => ({ ...prev, products: result.products }));
     });
   }, [activeCategory]);

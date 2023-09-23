@@ -41,3 +41,32 @@ body {
     background-color: unset;
   }
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 0;
+  left: -156px;
+  background: var(--tg-theme-bg-color);
+}
+
+.dropdown-content > * {
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content > *:hover {
+  background: rgba(0, 0, 0, 0.25);
+}

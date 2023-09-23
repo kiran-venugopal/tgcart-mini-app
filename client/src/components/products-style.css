@@ -1,15 +1,17 @@
 .products {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
 }
 
 .product-item {
-  background: var(--tg-theme-secondary-bg-color);
+  border-top: 1px solid var(--tg-theme-secondary-bg-color);
   padding: 12px;
   width: 100%;
   display: flex;
   align-items: center;
   gap: 15px;
-  border-radius: 5px;
+}
+
+.product-item:last-child {
+  border-bottom: 1px solid var(--tg-theme-secondary-bg-color);
 }
