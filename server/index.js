@@ -49,3 +49,5 @@ app.post("/invoice-link", async (req, res) => {
 app.listen(PORT || 5000, () => {
   console.log("listening");
 });
+
+export default app;
