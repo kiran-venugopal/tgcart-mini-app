@@ -26,7 +26,8 @@ app.post("/invoice-link", async (req, res) => {
       prices: [
         {
           label: "Total Amount",
-          amount: reqBody.amount,
+          /** `amount` needs to be multiplied by 100, refer: https://core.telegram.org/bots/api#labeledprice */
+          amount: reqBody.amount * 100,
         },
       ],
     };
