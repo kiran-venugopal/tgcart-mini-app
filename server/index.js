@@ -22,11 +22,11 @@ app.post("/invoice-link", async (req, res) => {
       description: reqBody.description,
       payload: reqBody.payload || "data",
       provider_token: PAYMENT_TOKEN,
-      currency: "RUB",
+      currency: "USD",
       prices: [
         {
           label: "Total Amount",
-          amount: reqBody.amount * 100,
+          amount: reqBody.amount,
         },
       ],
     };
