@@ -27,14 +27,7 @@ const useProducts = () => {
     setState((prev) => ({ ...prev, activeCategory: category }));
   };
 
-  const getFinalPrice = (product) => {
-    const { price, discountPercentage } = product;
-    const discount = (price / 100) * discountPercentage;
-    return (price - discount).toFixed(2);
-  };
-
   return {
-    getFinalPrice,
     setCategory,
     products,
     categories,

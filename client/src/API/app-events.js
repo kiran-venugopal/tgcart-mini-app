@@ -1,5 +1,3 @@
-
-
-export const onThemeChange = (callback) => {
-    Telegram.WebApp.onEvent("themeChanged",callback)
-}
+export const onMainButtonClick = (callback) => {
+  Telegram.WebApp.onEvent("mainButtonClicked", callback);
+};

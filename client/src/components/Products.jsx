@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
 import Categories from "./Categories";
 import "./products-style.css";
+import getFinalPrice from "../utils/getFinalPrice";
 
 export default function Products() {
-  const { activeCategory, products, categories, getFinalPrice, setCategory } =
+  const { activeCategory, products, categories, setCategory } =
     useProducts();
+
+  const navigate = useNavigate();
 
   const shareLink = (product) => {
     Telegram.WebApp.openTelegramLink(
@@ -12,8 +16,15 @@ export default function Products() {
     );
   };
 
+  const goToProductView = (product) => {
+    navigate(`/product/${product.id}`);
+    Telegram?.WebApp.HapticFeedback.impactOccurred("medium");
+    Telegram.WebApp.BackButton.show();
+  };
+
   return (
-    <div className="px-2 ">
+    <div className="px-2 fadeIn">
+      {import.meta.env.REACT_APP_BACKEND_URL}
       <Categories
         items={categories}
         active={activeCategory}
@@ -22,10 +33,12 @@ export default function Products() {
       <section className="products">
         {products.map((product) => (
           <div key={product.id} className="product-item ">
-            <img
-              className="w-16 h-14 object-cover rounded"
-              src={product.thumbnail}
-            />
+            <button onClick={() => goToProductView(product)}>
+              <img
+                className="w-16 h-14 object-cover rounded"
+                src={product.thumbnail}
+              />
+            </button>
             <section className="flex-1">
               <div className="font-medium truncate text-sm">
                 {product.title}
@@ -41,14 +54,17 @@ export default function Products() {
               </div>
             </section>
             <section className="w-5">
-              <div class="dropdown">
+              <div className="dropdown">
                 <button className="p-2 dropbtn">
                   <span className="material-symbols-outlined">more_vert</span>
                 </button>
 
-                <div class="dropdown-content text-sm">
-                  <button className="w-full gap-2 flex items-center justify-start">
-                    <span class="material-symbols-outlined text-[var(--tg-theme-hint-color)]">
+                <div className="dropdown-content text-sm">
+                  <button
+                    onClick={() => goToProductView(product)}
+                    className="w-full gap-2 flex items-center justify-start"
+                  >
+                    <span className="material-symbols-outlined text-[var(--tg-theme-hint-color)]">
                       shopping_bag
                     </span>
                     <span>Buy</span>{" "}
@@ -58,7 +74,7 @@ export default function Products() {
                     onClick={() => shareLink(product)}
                     className="w-full gap-2 flex items-center justify-start"
                   >
-                    <span class="material-symbols-outlined text-[var(--tg-theme-hint-color)]">
+                    <span className="material-symbols-outlined text-[var(--tg-theme-hint-color)]">
                       send
                     </span>
                     <span>Share</span>

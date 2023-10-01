@@ -18,3 +18,9 @@ export async function getCategories() {
   const data = await response.json();
   return ["all", ...data.splice(0, 10)];
 }
+
+export async function getProduct(id) {
+  const response = await fetch(`${API_URL}/product/${id}`);
+  const data = await response.json();
+  return data;
+}
