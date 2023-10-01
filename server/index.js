@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const { createInvoiceLink, sendMessage } = require("./utils/bot-methods");
-const { welcomeMessage } = require("./const/messages");
+const { getWelcomeMessage } = require("./const/messages");
 
 dotenv.config();
 
@@ -51,7 +51,7 @@ app.post("/", async (req, res) => {
       const { chat } = message;
       const body = {
         chat_id: chat.id,
-        text: welcomeMessage,
+        text: getWelcomeMessage({ name: chat.first_name }),
         reply_markup: {
           inline_keyboard: [
             [
@@ -64,6 +64,7 @@ app.post("/", async (req, res) => {
             ],
           ],
         },
+        parse_mode: "Markdown",
       };
 
       const response = await sendMessage({ body });
