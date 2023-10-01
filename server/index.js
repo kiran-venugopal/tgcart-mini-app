@@ -1,14 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const fetch = require("node-fetch");
 const cors = require("cors");
+const { createInvoiceLink, sendMessage } = require("./utils/bot-methods");
+const { welcomeMessage } = require("./const/messages");
 
 dotenv.config();
 
-const { PORT, BOT_TOKEN, PAYMENT_TOKEN, CLIENT_APP_URL } = process.env;
+const { PORT, PAYMENT_TOKEN, CLIENT_APP_URL } = process.env;
 const app = express();
-
-const BOT_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
 app.use(express.json());
 app.use(cors({ origin: CLIENT_APP_URL, optionsSuccessStatus: 200 }));
@@ -31,16 +30,47 @@ app.post("/invoice-link", async (req, res) => {
         },
       ],
     };
-    const response = await fetch(`${BOT_API_URL}/createInvoiceLink`, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
+
+    const data = await createInvoiceLink({ body });
+
     console.log({ data });
+
     return res.json({ success: !!data.result, url: data.result });
+  } catch (err) {
+    console.error(err);
+    return res.json({ success: false });
+  }
+});
+
+app.post("/", async (req, res) => {
+  try {
+    console.log("webhook event", req.body);
+    const { message } = req.body;
+
+    if (message) {
+      const { chat } = message;
+      const body = {
+        chat_id: chat.id,
+        text: welcomeMessage,
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "BUY NOW",
+                web_app: {
+                  url: CLIENT_APP_URL,
+                },
+              },
+            ],
+          ],
+        },
+      };
+
+      const response = await sendMessage({ body });
+      console.log({ response });
+    }
+
+    return res.json({ success: true });
   } catch (err) {
     console.error(err);
     return res.json({ success: false });
