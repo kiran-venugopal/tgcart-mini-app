@@ -9,6 +9,7 @@ export default function Checkout({ product, count }) {
 
   useEffect(() => {
     onMainButtonClick(async () => {
+      Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
       const body = {
         title: product.title,
         description: product.description,

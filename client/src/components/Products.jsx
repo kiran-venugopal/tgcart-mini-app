@@ -12,7 +12,7 @@ export default function Products() {
 
   const shareLink = (product) => {
     Telegram.WebApp.openTelegramLink(
-      `https://t.me/share/url?text=Hey! Check this incredible deal for ${product.title} at TCart&url=https://dummyjson.com/products/${product.id}`
+      `https://t.me/share/url?text=Hey! Check this incredible deal for ${product.title} at ${import.meta.env.VITE_APP_NAME}&url=https://dummyjson.com/products/${product.id}`
     );
   };
 

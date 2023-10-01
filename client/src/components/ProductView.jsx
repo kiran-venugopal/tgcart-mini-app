@@ -23,7 +23,7 @@ export default function ProductView() {
     });
     Telegram.WebApp.BackButton.onClick(() => {
       setState((prev) => {
-        Telegram.WebApp.MainButton.hide()
+        Telegram.WebApp.MainButton.hide();
 
         if (prev.showCheckout) {
           return { ...prev, showCheckout: false };
@@ -43,13 +43,16 @@ export default function ProductView() {
       ...prev,
       count: prev.count + value < 1 ? 1 : prev.count + value,
     }));
+    Telegram?.WebApp.HapticFeedback.impactOccurred("medium");
   };
 
-
   const handleBuy = () => {
-    setState((prev) => ({ ...prev, showCheckout: true }))
-    Telegram.WebApp.MainButton.setParams({text:`Pay $ ${getFinalPrice(product, count)}`}).show()
-  }
+    setState((prev) => ({ ...prev, showCheckout: true }));
+    Telegram.WebApp.MainButton.setParams({
+      text: `Pay $ ${getFinalPrice(product, count)}`,
+    }).show();
+    Telegram.WebApp.HapticFeedback.impactOccurred("medium");
+  };
 
   if (isLoading)
     return (
