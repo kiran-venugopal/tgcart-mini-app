@@ -8,6 +8,8 @@ An e-commerce Telegram mini app with payment gateway, which can be launched from
 
 ### Server
 
+/server folder of this repo contains code for listening to webhook events (which you need to set using [setWebhooks](https://core.telegram.org/bots/webapps#launching-mini-apps-from-the-menu-button)) and payment invoice generation API (`/invoice-link` route in /server/index.js)
+
 
 #### 1. go inside /server folder and create .env file using the .env.sample template file
 
@@ -37,6 +39,11 @@ run `npm run start` inside the /server folder, this will start the server in por
 
 
 ### Client
+
+/client folder of this repo contains a [react app](https://react.dev/) which will render the e-commerce mini app, it also uses the [Telegram web app API](https://core.telegram.org/bots/webapps#initializing-mini-apps) library (which brings the core APIs to interact with the Telegram bot and app) in client/index.html which will load the Telegram.WebApp module in window object 
+```
+ <script src="https://telegram.org/js/telegram-web-app.js"></script>
+```
 
 #### 1. go inside /client folder and create .env file using the .env.sample template file
 
