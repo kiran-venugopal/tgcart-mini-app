@@ -2,6 +2,8 @@
 
 An e-commerce Telegram mini app with payment gateway, which can be launched from a Telegram bot 
 
+## 🥉 3rd prize winner of Telegram's mini app contest
+
 
 ## Installation
 
